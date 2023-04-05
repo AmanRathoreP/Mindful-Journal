@@ -2,6 +2,7 @@ import QtCore
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Controls.Material
 
 
 ApplicationWindow {
@@ -9,7 +10,9 @@ ApplicationWindow {
     width: 360
     height: 520
     visible: true
-    title: "User Display for SDV"
+    title: "Mindful Journal"
+    Material.theme: Material.Dark
+//    Material.accent: Material.Lime
 
     Action {
         id: navigateBackAction
@@ -60,7 +63,7 @@ ApplicationWindow {
 
                     Action {
                         text: "Help"
-                        onTriggered:Qt.openUrlExternally("https://github.com/AmanRathoreP/Raspberry-Pi-4-Self-Driving-Vechicle")
+                        onTriggered:Qt.openUrlExternally("https://github.com/AmanRathoreP/Mindful-Journal")
                     }
                     Action {
                         text: "About"
@@ -106,10 +109,8 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-
         initialItem: Pane {
             id: pane
-
             Label {
                 text: "<html><body><h1>Here you will be able to entry you day/week/month etc.</h1></body></html>"
                 anchors{
@@ -144,7 +145,7 @@ ApplicationWindow {
 
             Label {
                 width: aboutDialog.availableWidth
-                text: "This apps provides use to write it's personal diary weather in the form of text or in the form of audio or whatever!"
+                text: "This apps provides user to write it's personal diary weather in the form of text or in the form of audio or whatever!"
                 wrapMode: Label.Wrap
                 font.pixelSize: 24
             }
