@@ -17,6 +17,7 @@ qt_add_qml_module(appMindful-Journal
     VERSION 1.0
     QML_FILES
     "src/ui/Main.qml"
+    "src/ui/pages/home.qml"
     "src/ui/pages/settings.qml"
 )
 

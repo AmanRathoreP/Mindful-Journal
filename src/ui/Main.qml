@@ -12,7 +12,7 @@ ApplicationWindow {
     visible: true
     title: "Mindful Journal"
     Material.theme: Material.Dark
-//    Material.accent: Material.Lime
+    //    Material.accent: Material.Lime
 
     Action {
         id: navigateBackAction
@@ -109,24 +109,8 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: Pane {
-            id: pane
-            Label {
-                text: "<html><body><h1>Here you will be able to entry you day/week/month etc.</h1></body></html>"
-                anchors{
-                    margins: 20
-                    left: parent.left
-                    right: parent.right
-                }
-                horizontalAlignment: Label.AlignHCenter
-                verticalAlignment: Label.AlignVCenter
-                wrapMode: Label.Wrap
-            }
-
-
-        }
+        initialItem: Qt.createComponent("./pages/home.qml")
     }
-
 
 
     Dialog {
