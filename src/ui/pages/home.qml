@@ -38,7 +38,7 @@ Page {
                 }
             }
 
-            Button {
+            ToolButton  {
                 width:iconWidth
                 height:iconHeight
                 id:buttonRecord
@@ -46,7 +46,7 @@ Page {
                 onClicked: console.log("Record clicked")
             }
 
-            Button {
+            ToolButton  {
                 width:iconWidth
                 height:iconHeight
                 id:buttonWrite
@@ -54,7 +54,7 @@ Page {
                 onClicked: console.log("Edit clicked")
             }
 
-            Button {
+            ToolButton  {
                 width:iconWidth
                 height:iconHeight
                 id:buttonDelete
@@ -73,14 +73,14 @@ Page {
             bottom:parent.bottom
         }
         spacing: 5
-        Button {
+        ToolButton  {
             id:buttonAddSource
             width:iconWidth
             height:iconHeight
             icon.source: "qrc:/graphics/images/icons/resources/icons/add.svg"
             onClicked: testModel.append({})
         }
-        Button {
+        ToolButton  {
             id:buttonStartEntry
             width:iconWidth
             height:iconHeight
@@ -90,7 +90,7 @@ Page {
                 buttonStartEntry.enabled=false
             }
         }
-        Button {
+        ToolButton {
             id:buttonSaveEntry
             width:iconWidth
             height:iconHeight
