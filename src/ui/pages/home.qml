@@ -21,11 +21,11 @@ Page {
             width:listSources.width
             spacing: 5
 
-            TextArea {
-                width: parent.width - buttonWrite.width *4
+            TextField {
+                width: parent.width - iconWidth * 4
                 height:buttonRecord.height
                 font {
-                    pixelSize: 25
+                    pixelSize: 15
                     family: "Calibri"
                     italic: true
                 }
@@ -75,15 +75,15 @@ Page {
         spacing: 5
         ToolButton  {
             id:buttonAddSource
-            width:iconWidth
-            height:iconHeight
+            width:iconWidth * 1.5
+            height:iconHeight * 1.5
             icon.source: "qrc:/graphics/images/icons/resources/icons/add.svg"
             onClicked: testModel.append({})
         }
         ToolButton  {
             id:buttonStartEntry
-            width:iconWidth
-            height:iconHeight
+            width:iconWidth * 1.5
+            height:iconHeight * 1.5
             icon.source: "qrc:/graphics/images/icons/resources/icons/start.svg"
             onClicked: {
                 buttonSaveEntry.enabled=true
@@ -92,8 +92,8 @@ Page {
         }
         ToolButton {
             id:buttonSaveEntry
-            width:iconWidth
-            height:iconHeight
+            width:iconWidth * 1.5
+            height:iconHeight * 1.5
             icon.source: "qrc:/graphics/images/icons/resources/icons/stop.svg"
             enabled: false
             onClicked: {
