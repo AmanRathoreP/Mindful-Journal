@@ -42,7 +42,7 @@ Page {
                 width:iconWidth
                 height:iconHeight
                 id:buttonRecord
-                icon.source: "https://www.svgrepo.com/show/498929/record.svg"
+                icon.source: "qrc:/graphics/images/icons/resources/icons/record.svg"
                 onClicked: console.log("Record clicked")
             }
 
@@ -50,7 +50,7 @@ Page {
                 width:iconWidth
                 height:iconHeight
                 id:buttonWrite
-                icon.source: "https://www.svgrepo.com/show/489638/type.svg"
+                icon.source: "qrc:/graphics/images/icons/resources/icons/type-text.svg"
                 onClicked: console.log("Edit clicked")
             }
 
@@ -58,7 +58,7 @@ Page {
                 width:iconWidth
                 height:iconHeight
                 id:buttonDelete
-                icon.source: "https://www.svgrepo.com/show/511788/delete-1487.svg"
+                icon.source: "qrc:/graphics/images/icons/resources/icons/delete.svg"
                 onClicked:console.log("Remove clicked")
             }
         }
@@ -77,14 +77,14 @@ Page {
             id:buttonAddSource
             width:iconWidth
             height:iconHeight
-            icon.source: "https://www.svgrepo.com/show/513800/add-square.svg"
+            icon.source: "qrc:/graphics/images/icons/resources/icons/add.svg"
             onClicked: testModel.append({})
         }
         Button {
             id:buttonStartEntry
             width:iconWidth
             height:iconHeight
-            icon.source: "https://www.svgrepo.com/show/500138/animation-play.svg"
+            icon.source: "qrc:/graphics/images/icons/resources/icons/start.svg"
             onClicked: {
                 buttonSaveEntry.enabled=true
                 buttonStartEntry.enabled=false
@@ -94,7 +94,7 @@ Page {
             id:buttonSaveEntry
             width:iconWidth
             height:iconHeight
-            icon.source: "https://www.svgrepo.com/show/500137/animation-stop.svg"
+            icon.source: "qrc:/graphics/images/icons/resources/icons/stop.svg"
             enabled: false
             onClicked: {
                 buttonSaveEntry.enabled=false
