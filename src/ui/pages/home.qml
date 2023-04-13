@@ -6,6 +6,45 @@ Page {
     property int iconHeight: 42
     property int iconWidth: 42
 
+
+    header: TabBar {
+        id: tabBar
+        currentIndex: swipeView.currentIndex
+
+        TabButton {
+            text: "Raw Edit"
+        }
+        TabButton {
+            text: "Sources"
+        }
+    }
+
+    SwipeView {
+        id: swipeView
+        anchors.fill: parent
+        currentIndex: tabBar.currentIndex
+
+        Item{
+            ScrollView {
+                width:parent.width*0.957
+                height:parent.height*0.971
+                anchors {
+                    horizontalCenter : parent.horizontalCenter
+                    bottom:parent.bottom
+                }
+                clip: true
+
+                TextArea {
+                    id: textMainWriting
+                    width:parent.width
+                    font.pixelSize: 15
+                    text: "Today, ..."
+                }
+
+            }
+        }
+
+        Item {
     ListView {
         id:listSources
         height: parent.height-(rowOptions.height*1.5)
@@ -63,8 +102,8 @@ Page {
             }
         }
     }
-
-    Row {
+}}
+   footer: Row {
         padding: 5
         id:rowOptions
         anchors {
