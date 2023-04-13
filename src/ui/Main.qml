@@ -11,8 +11,6 @@ ApplicationWindow {
     height: 520
     visible: true
     title: "Mindful Journal"
-    Material.theme: Material.Dark
-    //    Material.accent: Material.Lime
 
     Action {
         id: navigateBackAction

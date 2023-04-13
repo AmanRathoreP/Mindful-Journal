@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 Page {
+    //TODO: add a option for weather to put tooltips or not for the components
     Label {
         text: "<html><h1>This is the settings panel for the app!</h1></html>"
         anchors{
