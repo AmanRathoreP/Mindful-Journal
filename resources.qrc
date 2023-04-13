@@ -7,7 +7,7 @@
         <file>resources/icons/start.svg</file>
         <file>resources/icons/stop.svg</file>
         <file>resources/icons/record.svg</file>
-        <file>resources/icons/type-text.svg</file>
         <file>resources/icons/delete.svg</file>
+        <file>resources/icons/external-file.svg</file>
     </qresource>
 </RCC>

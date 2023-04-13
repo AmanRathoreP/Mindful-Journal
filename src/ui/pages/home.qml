@@ -49,9 +49,9 @@ Page {
             ToolButton  {
                 width:iconWidth
                 height:iconHeight
-                id:buttonWrite
-                icon.source: "qrc:/graphics/images/icons/resources/icons/type-text.svg"
-                onClicked: console.log("Edit clicked")
+                id:buttonAttachExternalFile
+                icon.source: "qrc:/graphics/images/icons/resources/icons/external-file.svg"
+                onClicked: console.log("External files add clicked")
             }
 
             ToolButton  {
