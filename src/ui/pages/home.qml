@@ -15,7 +15,7 @@ Page {
             ToolTip {
                 delay:50
                 text: "Here is the final text which will be added to your main file of the entry"
-                visible: parent.hovered
+                visible: (parent.hovered || parent.pressed) && showToolTips
             }
         }
         TabButton {
@@ -23,7 +23,7 @@ Page {
             ToolTip {
                 delay:50
                 text: "Contains sources which you can add to the entry"
-                visible: parent.hovered
+                visible: (parent.hovered || parent.pressed) && showToolTips
             }
         }
     }
@@ -95,7 +95,7 @@ Page {
                         ToolTip {
                             delay:50
                             text: "Can be use to record the live audio from the current default mic of the device"
-                            visible: parent.hovered
+                            visible: (parent.hovered || parent.pressed) && showToolTips
                         }
                     }
 
@@ -108,7 +108,7 @@ Page {
                         ToolTip {
                             delay:50
                             text: "Can be used to attach files from the device's file system"
-                            visible: parent.hovered
+                            visible: (parent.hovered || parent.pressed) && showToolTips
                         }
                     }
 
@@ -121,7 +121,7 @@ Page {
                         ToolTip {
                             delay:50
                             text: "Deletes the source from the entry"
-                            visible: parent.hovered
+                            visible: (parent.hovered || parent.pressed) && showToolTips
                         }
                     }
                 }
@@ -146,7 +146,7 @@ Page {
             ToolTip {
                 delay:50
                 text: "Adds a new source for you entry"
-                visible: parent.hovered
+                visible: (parent.hovered || parent.pressed) && showToolTips
             }
         }
         ToolButton  {
@@ -161,7 +161,7 @@ Page {
             ToolTip {
                 delay:50
                 text: "Starts today's entry"
-                visible: parent.hovered
+                visible: (parent.hovered || parent.pressed) && showToolTips
             }
         }
         ToolButton {
@@ -177,7 +177,7 @@ Page {
             ToolTip {
                 delay:50
                 text: "Ends the current entry"
-                visible: parent.hovered
+                visible: (parent.hovered || parent.pressed) && showToolTips
             }
         }
     }
