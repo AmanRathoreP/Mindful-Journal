@@ -12,6 +12,12 @@ ApplicationWindow {
     visible: true
     title: "Mindful Journal"
 
+    Shortcut {
+        sequences: ["Esc", "Back"]
+        enabled: stackView.depth > 1
+        onActivated: navigateBackAction.trigger()
+    }
+
     Action {
         id: navigateBackAction
         onTriggered: {
@@ -23,7 +29,6 @@ ApplicationWindow {
             }
         }
     }
-
 
     Action {
         id: optionsMenuAction
