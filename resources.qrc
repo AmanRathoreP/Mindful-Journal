@@ -9,5 +9,7 @@
         <file>resources/icons/record.svg</file>
         <file>resources/icons/delete.svg</file>
         <file>resources/icons/external-file.svg</file>
+        <file>resources/icons/save.svg</file>
+        <file>resources/icons/reset.svg</file>
     </qresource>
 </RCC>

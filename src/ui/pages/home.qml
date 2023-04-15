@@ -3,9 +3,6 @@ import QtQuick.Controls
 
 Page {
 
-    property int iconHeight: 42
-    property int iconWidth: 42
-
     header: TabBar {
         id: tabBar
         currentIndex: swipeView.currentIndex
