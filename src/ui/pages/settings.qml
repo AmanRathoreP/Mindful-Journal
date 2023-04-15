@@ -12,10 +12,11 @@ Page {
 
         CheckBox {
             text: "Show tool tips to user"
+            checked: myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+            onCheckedChanged: myAppSettings.set_value("showToolTips", checked)
             ToolTip {
-                delay:50
                 text: "Sets weather to show the tooltips or not"
-                visible: (parent.hovered || parent.pressed) && showToolTips
+                visible: parent.hovered || parent.pressed
             }
         }
 
@@ -34,11 +35,14 @@ Page {
             height:iconHeight
             icon.source: "qrc:/graphics/images/icons/resources/icons/reset.svg"
             ToolTip {
-                delay:50
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Resets the app settings to it's default"
-                visible: (parent.hovered || parent.pressed) && showToolTips
+                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
             }
-            onClicked: dialogConfirmation.open()
+            onClicked: {
+                myAppSettings.myFunction()
+                dialogConfirmation.open()
+            }
             Dialog {
                 id: dialogConfirmation
 
@@ -64,9 +68,9 @@ Page {
             height:iconHeight
             icon.source: "qrc:/graphics/images/icons/resources/icons/save.svg"
             ToolTip {
-                delay:50
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Saves and apply the current changed settings"
-                visible: (parent.hovered || parent.pressed) && showToolTips
+                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
             }
             onClicked: dialogMessage.open()
             Dialog {

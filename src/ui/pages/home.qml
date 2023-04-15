@@ -10,17 +10,17 @@ Page {
         TabButton {
             text: "Raw Edit"
             ToolTip {
-                delay:50
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Here is the final text which will be added to your main file of the entry"
-                visible: (parent.hovered || parent.pressed) && showToolTips
+                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
             }
         }
         TabButton {
             text: "Sources"
             ToolTip {
-                delay:50
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Contains sources which you can add to the entry"
-                visible: (parent.hovered || parent.pressed) && showToolTips
+                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
             }
         }
     }
@@ -90,9 +90,9 @@ Page {
                         icon.source: "qrc:/graphics/images/icons/resources/icons/record.svg"
                         onClicked: console.log("Record clicked")
                         ToolTip {
-                            delay:50
+                            delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                             text: "Can be use to record the live audio from the current default mic of the device"
-                            visible: (parent.hovered || parent.pressed) && showToolTips
+                            visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
                         }
                     }
 
@@ -103,9 +103,9 @@ Page {
                         icon.source: "qrc:/graphics/images/icons/resources/icons/external-file.svg"
                         onClicked: console.log("External files add clicked")
                         ToolTip {
-                            delay:50
+                            delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                             text: "Can be used to attach files from the device's file system"
-                            visible: (parent.hovered || parent.pressed) && showToolTips
+                            visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
                         }
                     }
 
@@ -116,9 +116,9 @@ Page {
                         icon.source: "qrc:/graphics/images/icons/resources/icons/delete.svg"
                         onClicked:console.log("Remove clicked")
                         ToolTip {
-                            delay:50
+                            delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                             text: "Deletes the source from the entry"
-                            visible: (parent.hovered || parent.pressed) && showToolTips
+                            visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
                         }
                     }
                 }
@@ -141,9 +141,9 @@ Page {
             icon.source: "qrc:/graphics/images/icons/resources/icons/add.svg"
             onClicked: testModel.append({})
             ToolTip {
-                delay:50
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Adds a new source for you entry"
-                visible: (parent.hovered || parent.pressed) && showToolTips
+                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
             }
         }
         ToolButton  {
@@ -156,9 +156,9 @@ Page {
                 buttonStartEntry.enabled=false
             }
             ToolTip {
-                delay:50
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Starts today's entry"
-                visible: (parent.hovered || parent.pressed) && showToolTips
+                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
             }
         }
         ToolButton {
@@ -172,9 +172,9 @@ Page {
                 buttonStartEntry.enabled=true
             }
             ToolTip {
-                delay:50
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Ends the current entry"
-                visible: (parent.hovered || parent.pressed) && showToolTips
+                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
             }
         }
     }

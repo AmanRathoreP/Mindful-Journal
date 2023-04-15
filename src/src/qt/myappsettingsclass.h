@@ -1,0 +1,21 @@
+
+#ifndef MYAPPSETTINGSCLASS_H
+#define MYAPPSETTINGSCLASS_H
+
+#include <QSettings>
+
+
+
+class myAppSettingsClass : public QSettings
+{
+    Q_OBJECT
+public:
+    myAppSettingsClass(const QString &organization);
+
+public:
+    Q_INVOKABLE QVariant get_value(QString value_name);
+    Q_INVOKABLE void set_value(QString value_name, bool value_to_put);
+
+};
+
+#endif // MYAPPSETTINGSCLASS_H

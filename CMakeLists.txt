@@ -9,9 +9,15 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
+set( project_sources
+   src/src/qt/myappsettingsclass.h
+   src/src/qt/myappsettingsclass.cpp
+)
+
 qt_add_executable(appMindful-Journal
     resources.qrc
     src/main.cpp
+    ${project_sources}
 )
 
 qt_add_qml_module(appMindful-Journal
