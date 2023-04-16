@@ -12,6 +12,10 @@ qt_standard_project_setup(REQUIRES 6.5)
 set( project_sources
    src/src/qt/myappsettingsclass.h
    src/src/qt/myappsettingsclass.cpp
+   src/src/others/mywriter.cpp
+   src/src/others/mywriter.h
+   src/src/qt/mywritergui.cpp
+   src/src/qt/mywritergui.h
 )
 
 qt_add_executable(appMindful-Journal

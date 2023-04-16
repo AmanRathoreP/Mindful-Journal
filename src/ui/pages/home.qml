@@ -42,6 +42,7 @@ Page {
 
                 TextArea {
                     id: textMainWriting
+                    enabled: false
                     width:parent.width
                     font.pixelSize: 15
                     text: "Today, ..."
@@ -67,6 +68,7 @@ Page {
                     spacing: 5
 
                     TextField {
+                        id: textNameOfSource
                         width: parent.width - iconWidth * 4
                         height:buttonRecord.height
                         font {
@@ -80,6 +82,9 @@ Page {
                             {
                                 selectAll()
                             }
+                        }
+                        onTextChanged: {
+                            testModel.setProperty(index, "textName", text);
                         }
                     }
 
@@ -114,7 +119,7 @@ Page {
                         height:iconHeight
                         id:buttonDelete
                         icon.source: "qrc:/graphics/images/icons/resources/icons/delete.svg"
-                        onClicked:console.log("Remove clicked")
+                        onClicked:testModel.remove(index)
                         ToolTip {
                             delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                             text: "Deletes the source from the entry"
@@ -139,7 +144,11 @@ Page {
             width:iconWidth
             height:iconHeight
             icon.source: "qrc:/graphics/images/icons/resources/icons/add.svg"
-            onClicked: testModel.append({})
+            enabled: false
+            onClicked: testModel.append({
+                                            textName:"This is the name of the source",
+                                            textSrc:"This is the path of the source"
+                                        })
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Adds a new source for you entry"
@@ -154,6 +163,8 @@ Page {
             onClicked: {
                 buttonSaveEntry.enabled=true
                 buttonStartEntry.enabled=false
+                buttonAddSource.enabled=true
+                textMainWriting.enabled=true
             }
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
@@ -170,6 +181,12 @@ Page {
             onClicked: {
                 buttonSaveEntry.enabled=false
                 buttonStartEntry.enabled=true
+                buttonAddSource.enabled=false
+                textMainWriting.enabled=false
+                for (var i = 0; i < testModel.count; i++) {
+                    myWriter.addSource(testModel.get(i).textName, testModel.get(i).textSrc)
+                }
+                myWriter.finishEntry(textMainWriting.text)
             }
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
@@ -181,7 +198,6 @@ Page {
 
     ListModel {
         id:testModel
-        ListElement{}
     }
 }
 
