@@ -15,12 +15,12 @@ Page {
             anchors{
                 left: parent.left
             }
-            checked: myAppSettings.get_value(settingId).indexOf("t") !== -1 ? true : false
+            checked: String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false
             onCheckedChanged: myAppSettings.set_value(settingId, checked)
             ToolTip {
                 text: toolTipText
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
         }
     }
@@ -37,7 +37,7 @@ Page {
             ToolTip {
                 text: toolTipText
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
         }
     }
@@ -101,7 +101,7 @@ Page {
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Resets the app settings to it's default"
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
             onClicked: dialogConfirmation.open()
             Dialog {
@@ -131,7 +131,7 @@ Page {
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Saves and apply the current changed settings"
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
             onClicked: dialogMessage.open()
             Dialog {

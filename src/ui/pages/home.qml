@@ -12,7 +12,7 @@ Page {
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Here is the final text which will be added to your main file of the entry"
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
         }
         TabButton {
@@ -20,7 +20,7 @@ Page {
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Contains sources which you can add to the entry"
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
         }
     }
@@ -92,7 +92,7 @@ Page {
                         ToolTip {
                             delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                             text: "Can be use to record the live audio from the current default mic of the device"
-                            visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                            visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
                         }
                     }
 
@@ -105,7 +105,7 @@ Page {
                         ToolTip {
                             delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                             text: "Can be used to attach files from the device's file system"
-                            visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                            visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
                         }
                     }
 
@@ -118,7 +118,7 @@ Page {
                         ToolTip {
                             delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                             text: "Deletes the source from the entry"
-                            visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                            visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
                         }
                     }
                 }
@@ -143,7 +143,7 @@ Page {
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Adds a new source for you entry"
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
         }
         ToolButton  {
@@ -158,7 +158,7 @@ Page {
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Starts today's entry"
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
         }
         ToolButton {
@@ -174,7 +174,7 @@ Page {
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Ends the current entry"
-                visible: (parent.hovered || parent.pressed) && myAppSettings.get_value("showToolTips").indexOf("t") !== -1 ? true : false
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
             }
         }
     }
