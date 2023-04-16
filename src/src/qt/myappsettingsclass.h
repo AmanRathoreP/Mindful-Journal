@@ -10,7 +10,7 @@ class myAppSettingsClass : public QSettings
 {
     Q_OBJECT
 public:
-    myAppSettingsClass(const QString &organization);
+    myAppSettingsClass(const QString &fileNameToSaveSettings);
 
 public:
     Q_INVOKABLE QVariant get_value(QString value_name);

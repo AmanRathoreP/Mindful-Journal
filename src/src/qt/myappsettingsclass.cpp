@@ -2,8 +2,8 @@
 #include "myappsettingsclass.h"
 #include <QSettings>
 
-myAppSettingsClass::myAppSettingsClass(const QString &organization)
-    : QSettings(organization)
+myAppSettingsClass::myAppSettingsClass(const QString &fileNameToSaveSettings)
+    : QSettings(fileNameToSaveSettings, QSettings::IniFormat)
 {
     qDebug() << "Settings class sucessfully created!";
 }
