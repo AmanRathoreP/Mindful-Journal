@@ -24,20 +24,31 @@ Page {
             }
         }
     }
+
     Component {
         id: sliderDelegateComponent
 
-        Slider {
-            value: parseInt(myAppSettings.get_value(settingId))
-            from: startingPositionOfSlider
-            to: endingPositionOfSlider
-            onValueChanged: {
-                myAppSettings.set_value(settingId, value)
+        Column{
+            Label {
+                text: labelText
             }
-            ToolTip {
-                text: toolTipText
-                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
-                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+            Slider {
+                value: parseInt(myAppSettings.get_value(settingId))
+                from: startingPositionOfSlider
+                to: endingPositionOfSlider
+                anchors{
+                    left:parent.left
+                    right:parent.right
+                }
+
+                onValueChanged: {
+                    myAppSettings.set_value(settingId, value)
+                }
+                ToolTip {
+                    text: toolTipText
+                    delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
+                    visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+                }
             }
         }
     }
