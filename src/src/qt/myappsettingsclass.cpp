@@ -17,3 +17,8 @@ void myAppSettingsClass::set_value(QString value_name, bool value_to_put)
 {
     this->setValue(value_name,value_to_put);
 }
+
+void myAppSettingsClass::set_value(QString value_name, int value_to_put)
+{
+    this->setValue(value_name,value_to_put);
+}

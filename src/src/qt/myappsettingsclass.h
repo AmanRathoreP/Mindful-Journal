@@ -15,6 +15,7 @@ public:
 public:
     Q_INVOKABLE QVariant get_value(QString value_name);
     Q_INVOKABLE void set_value(QString value_name, bool value_to_put);
+    Q_INVOKABLE void set_value(QString value_name, int value_to_put);
 
 };
 
