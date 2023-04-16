@@ -22,3 +22,10 @@ void myAppSettingsClass::set_value(QString value_name, int value_to_put)
 {
     this->setValue(value_name,value_to_put);
 }
+
+void myAppSettingsClass::reset_settings(void)
+{
+    for (int i = 0; i < this->settingsList.size(); i++) {
+        this->setValue(this->settingsList.at(i).first, this->settingsList.at(i).second);
+    }
+}

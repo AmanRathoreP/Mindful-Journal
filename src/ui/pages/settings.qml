@@ -129,13 +129,16 @@ Page {
 
                 title: "Confirmation"
                 standardButtons: Dialog.Ok | Dialog.Cancel
-                onAccepted: console.log("Ok clicked")
+                onAccepted: {
+                    myAppSettings.reset_settings()
+                    Qt.quit()
+                }
                 onRejected: console.log("Cancel clicked")
                 Column {
                     spacing: 20
                     anchors.fill: parent
                     Label {
-                        text: "This will ensure that all your personal settings are dead"
+                        text: "Ensures that all your personal settings are dead\nThis also kills the current instance of the app"
                     }
                 }
             }
