@@ -28,9 +28,9 @@ Page {
         id: sliderDelegateComponent
 
         Slider {
-            value: 50
-            from: 0
-            to: 1000
+            value: parseInt(myAppSettings.get_value(settingId))
+            from: startingPositionOfSlider
+            to: endingPositionOfSlider
             onValueChanged: {
                 myAppSettings.set_value(settingId, value)
             }
@@ -63,7 +63,10 @@ Page {
             ListElement { type: "SliderDelegate";
                 labelTextToDisplay: "Delay for the tool tip to appear";
                 toolTipTextToDisplay: "Inquires the duration of the delay after which the tool tip is expected to appear";
-                textOfSetting: "delayForToolTipsToAppear" }
+                textOfSetting: "delayForToolTipsToAppear";
+                sliderStartingValue: 0;
+                sliderEndingValue: 1000
+            }
         }
 
         section.property: "type"
@@ -80,6 +83,8 @@ Page {
             property string labelText: labelTextToDisplay
             property string toolTipText: toolTipTextToDisplay
             property string settingId: textOfSetting
+            property int startingPositionOfSlider: sliderStartingValue
+            property int endingPositionOfSlider: sliderEndingValue
             property ListView view: listView
             property int ourIndex: index
         }
