@@ -19,13 +19,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    QSettings myAppConstantsSettings("Self-Driving Vehicle");
-    myAppConstantsSettings.setValue("iconHeight", 42);
-    myAppConstantsSettings.setValue("iconWidth", 42);
-
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("iconHeight", myAppConstantsSettings.value("iconHeight").toInt());
-    engine.rootContext()->setContextProperty("iconWidth", myAppConstantsSettings.value("iconWidth").toInt());
+    engine.rootContext()->setContextProperty("iconHeight", 42);
+    engine.rootContext()->setContextProperty("iconWidth", 42);
     engine.rootContext()->setContextProperty("myAppSettings", &myAppSettings);
     engine.rootContext()->setContextProperty("myWriter", &myWriter);
 

@@ -5,8 +5,10 @@ Page {
 
     property var delegateComponentMap: {
         "CheckDelegate": checkDelegateComponent,
-        "SliderDelegate": sliderDelegateComponent
+        "SliderDelegate": sliderDelegateComponent,
+        "SwitchDelegate": switchDelegateComponent
     }
+
     Component {
         id: checkDelegateComponent
 
@@ -16,7 +18,31 @@ Page {
                 left: parent.left
             }
             checked: String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false
-            onCheckedChanged: myAppSettings.set_value(settingId, checked)
+            onCheckedChanged:{
+                labelRestartText.visible = checked === (String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false) ? false : restartTextVisibility
+                myAppSettings.set_value(settingId, checked)
+            }
+            ToolTip {
+                text: toolTipText
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+            }
+        }
+    }
+
+    Component {
+        id: switchDelegateComponent
+
+        SwitchDelegate {
+            text: labelText
+            anchors{
+                left: parent.left
+            }
+            checked: String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false
+            onCheckedChanged: {
+                labelRestartText.visible = checked === (String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false) ? false : restartTextVisibility
+                myAppSettings.set_value(settingId, checked)
+            }
             ToolTip {
                 text: toolTipText
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
@@ -42,6 +68,7 @@ Page {
                 }
 
                 onValueChanged: {
+                    labelRestartText.visible = value === parseInt(myAppSettings.get_value(settingId)) ? false : restartTextVisibility
                     myAppSettings.set_value(settingId, value)
                 }
                 ToolTip {
@@ -66,8 +93,8 @@ Page {
         clip:true
 
         model: ListModel {
-            ListElement { type: "CheckDelegate";
-                labelTextToDisplay: "Make Tool Tips visible";
+            ListElement { type: "SwitchDelegate";
+                labelTextToDisplay: "Tool Tips";
                 toolTipTextToDisplay: "This is a tool tip";
                 textOfSetting: "showToolTips" }
 
@@ -76,7 +103,8 @@ Page {
                 toolTipTextToDisplay: "Inquires the duration of the delay after which the tool tip is expected to appear";
                 textOfSetting: "delayForToolTipsToAppear";
                 sliderStartingValue: 0;
-                sliderEndingValue: 1000
+                sliderEndingValue: 1000;
+                restartRequired: true
             }
         }
 
@@ -96,6 +124,7 @@ Page {
             property string settingId: textOfSetting
             property int startingPositionOfSlider: sliderStartingValue
             property int endingPositionOfSlider: sliderEndingValue
+            property bool restartTextVisibility: restartRequired
             property ListView view: listView
             property int ourIndex: index
         }
@@ -143,29 +172,14 @@ Page {
                 }
             }
         }
-        ToolButton  {
-            width:iconWidth
-            height:iconHeight
-            icon.source: "qrc:/graphics/images/icons/resources/icons/save.svg"
-            ToolTip {
-                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
-                text: "Saves and apply the current changed settings"
-                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
-            }
-            onClicked: dialogMessage.open()
-            Dialog {
-                id: dialogMessage
 
-                x: (parent.width - width) / 2
-                y: (parent.height - height) / 2
-                parent: Overlay.overlay
+        Label {
+            id: labelRestartText
+            text: "Restart required"
+            font.pixelSize: iconHeight*0.4
 
-                title: "Message"
-
-                Label {
-                    text: "Your settings are saved\nPlease restart the app in order to see chages"
-                }
-            }
+            color: "#e41e25"
+            visible: false
         }
 
     }
