@@ -11,5 +11,11 @@
         <file>resources/icons/external-file.svg</file>
         <file>resources/icons/save.svg</file>
         <file>resources/icons/reset.svg</file>
+        <file>resources/icons/about.svg</file>
+        <file>resources/icons/help.svg</file>
+        <file>resources/icons/author.svg</file>
+    </qresource>
+    <qresource prefix="/graphics/images/for-app">
+        <file>resources/images/journal.svg</file>
     </qresource>
 </RCC>

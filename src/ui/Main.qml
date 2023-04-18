@@ -66,10 +66,12 @@ ApplicationWindow {
 
                     Action {
                         text: "Help"
+                        icon.source: "qrc:/graphics/images/icons/resources/icons/help.svg"
                         onTriggered:Qt.openUrlExternally("https://github.com/AmanRathoreP/Mindful-Journal")
                     }
                     Action {
                         text: "About"
+                        icon.source: "qrc:/graphics/images/icons/resources/icons/about.svg"
                         onTriggered: aboutDialog.open()
                     }
                 }
@@ -115,28 +117,62 @@ ApplicationWindow {
         initialItem: Qt.createComponent("./pages/home.qml")
     }
 
-
     Dialog {
         id: aboutDialog
         modal: true
-        focus: true
         title: "About"
         x: (window.width - width) / 2
-        y: window.height / 6
+        y: (window.height - height) / 2
         width: Math.min(window.width, window.height) / 3 * 2
-        contentHeight: aboutColumn.height
+        contentHeight: imageLogo.height * 2
+        parent: Overlay.overlay
 
-        Column {
-            id: aboutColumn
-            spacing: 20
+        standardButtons: Dialog.Close
 
-            Label {
-                width: aboutDialog.availableWidth
-                text: "This apps provides user to write it's personal diary weather in the form of text or in the form of audio or whatever!"
-                wrapMode: Label.Wrap
-                font.pixelSize: 24
+        Flickable {
+            id: flickable
+            clip: true
+            anchors.fill: parent
+            contentHeight: aboutColumn.height
+
+            Column {
+                id: aboutColumn
+                spacing: 20
+                width: parent.width
+
+                Image {
+                    id: imageLogo
+                    width: parent.implicitWidth / 2
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    fillMode: Image.PreserveAspectFit
+                    source: "qrc:/graphics/images/for-app/resources/images/journal.svg"
+                }
+
+                Label {
+                    width: parent.width
+                    text: "This apps provides user to write it's personal diary weather in the form of text or in the form of audio or whatever!"
+                    wrapMode: Label.Wrap
+                }
+
+                Button{
+                    text :"About author"
+                    icon.source: "qrc:/graphics/images/icons/resources/icons/author.svg"
+                    onClicked: Qt.openUrlExternally("https://github.com/AmanRathoreP/AmanRathoreP")
+                    ToolTip {
+                        delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
+                        text: "The author of this app is Aman whose GitHub user name is \"AmanRathoreP\""
+                        visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+                    }
+                }
+            }
+
+            ScrollIndicator.vertical: ScrollIndicator {
+                parent: aboutDialog.contentItem
+                anchors.top: flickable.top
+                anchors.bottom: flickable.bottom
+                anchors.right: parent.right
+                anchors.rightMargin: -aboutDialog.rightPadding + 1
             }
         }
     }
-
 }
