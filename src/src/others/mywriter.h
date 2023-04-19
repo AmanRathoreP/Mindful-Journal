@@ -11,14 +11,16 @@
 class myWriter
 {
 public:
-    myWriter(const QString format);
+    myWriter(const QString format, const QString itemFormat);
 protected:
     void addSource(const QString srcName, const QString srcPath);
+    QString getNewSrcName(const int8_t index);
 public:
     QString parseEntry(QString textEntry);
 private:
     QList<QPair<QString, QString>> sourceList;
     QString entryFormat;
+    QString newItemFormat;
 };
 
 #endif // MYWRITER_H

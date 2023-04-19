@@ -8,10 +8,13 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    myWriterGUI myWriter("123");
+
     myAppSettingsClass myAppSettings("user-settings.conf");
     myAppSettings.settingsList.append(qMakePair("showToolTips", true));
     myAppSettings.settingsList.append(qMakePair("delayForToolTipsToAppear", 50));
+    myAppSettings.settingsList.append(qMakePair("newItemAddingFormat", "Day 93 (2022-09-30) [src - 2]"));
+
+    myWriterGUI myWriter("123", myAppSettings.get_value("newItemAddingFormat").toString());
 
     for (int i = 0; i < myAppSettings.settingsList.size(); i++) {
         if (!myAppSettings.contains(myAppSettings.settingsList.at(i).first)) {

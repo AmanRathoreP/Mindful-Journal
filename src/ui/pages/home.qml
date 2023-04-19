@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Dialogs
 
 Page {
 
@@ -70,13 +71,14 @@ Page {
                     TextField {
                         id: textNameOfSource
                         width: parent.width - iconWidth * 4
-                        height:buttonRecord.height
+                        height: iconHeight
                         font {
                             pixelSize: 15
                             family: "Calibri"
                             italic: true
                         }
                         placeholderText: "Name of Item!"
+                        text: myWriter.getNewSrcName(index)
                         onFocusChanged: {
                             if (focus)
                             {
@@ -84,6 +86,12 @@ Page {
                             }
                         }
                         onTextChanged: {
+                            var disallowedChars = ["\\", "/", ":", "*", "?", "\"", "<", ">", "|" ]
+                            for (var i = 0; i < disallowedChars.length; i++) {
+                                if (text.indexOf(disallowedChars[i]) !== -1) {
+                                    text = text.replace(disallowedChars[i], "")
+                                }
+                            }
                             testModel.setProperty(index, "textName", text);
                         }
                     }
@@ -91,12 +99,17 @@ Page {
                     ToolButton  {
                         width:iconWidth
                         height:iconHeight
-                        id:buttonRecord
-                        icon.source: "qrc:/graphics/images/icons/resources/icons/record.svg"
-                        onClicked: console.log("Record clicked")
+                        id:buttonAttachExternalFolder
+                        icon.source: "qrc:/graphics/images/icons/resources/icons/external-folder.svg"
+                        FolderDialog {
+                            id: folderDialog
+                            title: "Select a new source folder for the entry"
+                            onAccepted:testModel.setProperty(index, "textSrc", String(currentFolder))
+                        }
+                        onClicked: folderDialog.open()
                         ToolTip {
                             delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
-                            text: "Can be use to record the live audio from the current default mic of the device"
+                            text: "Can be use to add external folders to the current entry from the device's storage"
                             visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
                         }
                     }
@@ -106,7 +119,12 @@ Page {
                         height:iconHeight
                         id:buttonAttachExternalFile
                         icon.source: "qrc:/graphics/images/icons/resources/icons/external-file.svg"
-                        onClicked: console.log("External files add clicked")
+                        FileDialog {
+                            id: fileDialog
+                            title: "Select a new source file for the entry"
+                            onAccepted:testModel.setProperty(index, "textSrc", String(currentFile))
+                        }
+                        onClicked: fileDialog.open()
                         ToolTip {
                             delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                             text: "Can be used to attach files from the device's file system"
@@ -146,8 +164,8 @@ Page {
             icon.source: "qrc:/graphics/images/icons/resources/icons/add.svg"
             enabled: false
             onClicked: testModel.append({
-                                            textName:"This is the name of the source",
-                                            textSrc:"This is the path of the source"
+                                            textName:"noSourceNameGiven",
+                                            textSrc:""
                                         })
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
@@ -183,11 +201,38 @@ Page {
                 buttonStartEntry.enabled=true
                 buttonAddSource.enabled=false
                 textMainWriting.enabled=false
-                for (var i = 0; i < testModel.count; i++) {
-                    myWriter.addSource(testModel.get(i).textName, testModel.get(i).textSrc)
+
+                var myEmptySourcePathMessage = "";
+                var myEmptySourceNameMessage = "";
+                var myAmbiguousNamesMessage = "";
+
+                for (var j = 0; j < testModel.count; j++) {
+                    for (var k = 0; k < testModel.count; k++) {
+                        if (j !== k && testModel.get(j).textName === testModel.get(k).textName) {
+                            console.log("Text names are similar:", testModel.get(j).textName)
+                            myAmbiguousNamesMessage += String("Item source name is similar with items at index <" + String(j+1) + "> & <" + String(k+1) + "> and the similar name is <" + testModel.get(j).textName + ">\n\n")
+                            //                            var tempMessage= String("Item source name is similar with items at index <" + String(j+1) + "> & <" + String(k+1) + "> and the similar name is <" + testModel.get(j).textName + ">\n\n")
+                            //                            myAmbiguousNamesMessage += myAmbiguousNamesMessage.indexOf(tempMessage) === -1 ? "" : tempMessage
+                        }
+                    }
+                    if (testModel.get(j).textSrc === "") {
+                        myEmptySourcePathMessage += String("Item source path is empty with item name <" + testModel.get(j).textName + "> which is at index <" + String(j+1) + ">\n\n")
+                    }
+                    if (testModel.get(j).textName === "") {
+                        myEmptySourceNameMessage += String("Item source name is empty with item index<" + String(j+1) + ">\n\n")
+                    }
                 }
-                myWriter.finishEntry(textMainWriting.text)
+                if (myEmptySourcePathMessage + myEmptySourceNameMessage + myAmbiguousNamesMessage !== "") {
+                    for (var i = 0; i < testModel.count; i++) {
+                        myWriter.addSource(testModel.get(i).textName, testModel.get(i).textSrc)
+                    }
+                    myWriter.finishEntry(textMainWriting.text)
+                }
+                showError(myEmptySourcePathMessage, "Error: Empty Source Path")
+                showError(myEmptySourceNameMessage, "Error: Empty Source Name")
+                showError(myAmbiguousNamesMessage, "Error: Ambiguous Source Names")
             }
+
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Ends the current entry"
@@ -199,5 +244,26 @@ Page {
     ListModel {
         id:testModel
     }
+
+    MessageDialog {
+        id: errorDialog
+        title: "Error"
+        text: "An error occurred."
+        buttons: MessageDialog.Ok
+        visible: false
+
+        onAccepted: {
+            errorDialog.visible = false
+        }
+    }
+
+    function showError(errorMessageText, errorMessageTitle) {
+        if (errorMessageText !== "") {
+            errorDialog.text = errorMessageText
+            errorDialog.title = errorMessageTitle
+            errorDialog.visible = true
+        }
+    }
+
 }
 

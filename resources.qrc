@@ -6,7 +6,6 @@
         <file>resources/icons/add.svg</file>
         <file>resources/icons/start.svg</file>
         <file>resources/icons/stop.svg</file>
-        <file>resources/icons/record.svg</file>
         <file>resources/icons/delete.svg</file>
         <file>resources/icons/external-file.svg</file>
         <file>resources/icons/save.svg</file>
@@ -14,6 +13,7 @@
         <file>resources/icons/about.svg</file>
         <file>resources/icons/help.svg</file>
         <file>resources/icons/author.svg</file>
+        <file>resources/icons/external-folder.svg</file>
     </qresource>
     <qresource prefix="/graphics/images/for-app">
         <file>resources/images/journal.svg</file>
