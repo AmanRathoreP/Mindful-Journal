@@ -10,7 +10,11 @@ void myWriter::addSource(const QString srcName, const QString srcPath)
 
 QString myWriter::getNewSrcName(const int8_t index)
 {
-    return this->newItemFormat+"sdf";
+    QString newSrcName = this->newItemFormat;
+    newSrcName = newSrcName.replace("<source_number>", QString::number(index + 1));
+    newSrcName = newSrcName.replace("<entry_number>", "(entry_number)");
+
+    return newSrcName;
 }
 
 QString myWriter::parseEntry(QString textEntry)

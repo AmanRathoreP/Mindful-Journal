@@ -6,7 +6,41 @@ Page {
     property var delegateComponentMap: {
         "CheckDelegate": checkDelegateComponent,
         "SliderDelegate": sliderDelegateComponent,
-        "SwitchDelegate": switchDelegateComponent
+        "SwitchDelegate": switchDelegateComponent,
+        "TextFieldDelegate": textFieldDelegateComponent
+    }
+
+    Component {
+        id: textFieldDelegateComponent
+
+        Column{
+            Label {
+                text: labelText
+            }
+        TextField {
+            placeholderText: labelText
+            text: String(myAppSettings.get_value(settingId))
+            anchors{
+                    left:parent.left
+                    right:parent.right
+            }
+            onTextChanged:{
+                var disallowedChars = ["\\", "/", ":", "*", "?", "\"", "|"]
+                for (var i = 0; i < disallowedChars.length; i++) {
+                    if (text.indexOf(disallowedChars[i]) !== -1) {
+                        text = text.replace(disallowedChars[i], "")
+                    }
+                }
+                labelRestartText.visible = (text === String(myAppSettings.get_value(settingId)) ? false : restartTextVisibility) || labelRestartText.visible
+                myAppSettings.set_value(settingId, text)
+            }
+            ToolTip {
+                text: toolTipText
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+            }
+        }
+    }
     }
 
     Component {
@@ -96,7 +130,8 @@ Page {
             ListElement { type: "SwitchDelegate";
                 labelTextToDisplay: "Tool Tips";
                 toolTipTextToDisplay: "This is a tool tip";
-                textOfSetting: "showToolTips" }
+                textOfSetting: "showToolTips"
+            }
 
             ListElement { type: "SliderDelegate";
                 labelTextToDisplay: "Delay for the tool tip to appear";
@@ -104,6 +139,13 @@ Page {
                 textOfSetting: "delayForToolTipsToAppear";
                 sliderStartingValue: 0;
                 sliderEndingValue: 1000;
+                restartRequired: true
+            }
+
+            ListElement { type: "TextFieldDelegate";
+                labelTextToDisplay: "New Item adding format";
+                toolTipTextToDisplay: "Provides the format in which the new item name will come";
+                textOfSetting: "newItemAddingFormat";
                 restartRequired: true
             }
         }

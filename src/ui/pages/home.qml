@@ -197,11 +197,6 @@ Page {
             icon.source: "qrc:/graphics/images/icons/resources/icons/stop.svg"
             enabled: false
             onClicked: {
-                buttonSaveEntry.enabled=false
-                buttonStartEntry.enabled=true
-                buttonAddSource.enabled=false
-                textMainWriting.enabled=false
-
                 var myEmptySourcePathMessage = "";
                 var myEmptySourceNameMessage = "";
                 var myAmbiguousNamesMessage = "";
@@ -222,7 +217,11 @@ Page {
                         myEmptySourceNameMessage += String("Item source name is empty with item index<" + String(j+1) + ">\n\n")
                     }
                 }
-                if (myEmptySourcePathMessage + myEmptySourceNameMessage + myAmbiguousNamesMessage !== "") {
+                if (myEmptySourcePathMessage + myEmptySourceNameMessage + myAmbiguousNamesMessage === "") {
+                    buttonSaveEntry.enabled=false
+                    buttonStartEntry.enabled=true
+                    buttonAddSource.enabled=false
+                    textMainWriting.enabled=false
                     for (var i = 0; i < testModel.count; i++) {
                         myWriter.addSource(testModel.get(i).textName, testModel.get(i).textSrc)
                     }

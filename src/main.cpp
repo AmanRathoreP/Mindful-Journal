@@ -12,15 +12,16 @@ int main(int argc, char *argv[])
     myAppSettingsClass myAppSettings("user-settings.conf");
     myAppSettings.settingsList.append(qMakePair("showToolTips", true));
     myAppSettings.settingsList.append(qMakePair("delayForToolTipsToAppear", 50));
-    myAppSettings.settingsList.append(qMakePair("newItemAddingFormat", "Day 93 (2022-09-30) [src - 2]"));
-
-    myWriterGUI myWriter("123", myAppSettings.get_value("newItemAddingFormat").toString());
+    myAppSettings.settingsList.append(qMakePair("newItemAddingFormat", "Day <entry_number> (<yyyy>-<MM>-<dd>) [src - <source_number>]"));
+    myAppSettings.settingsList.append(qMakePair("newEntryFormat", "entry format is not specified"));
 
     for (int i = 0; i < myAppSettings.settingsList.size(); i++) {
         if (!myAppSettings.contains(myAppSettings.settingsList.at(i).first)) {
             myAppSettings.setValue(myAppSettings.settingsList.at(i).first, myAppSettings.settingsList.at(i).second);
         }
     }
+
+    myWriterGUI myWriter(myAppSettings.get_value("newEntryFormat").toString(), myAppSettings.get_value("newItemAddingFormat").toString());
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("iconHeight", 42);
