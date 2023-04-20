@@ -9,7 +9,7 @@ Page {
         currentIndex: swipeView.currentIndex
 
         TabButton {
-            text: "Raw Edit"
+            text: "Entry Text"
             ToolTip {
                 delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
                 text: "Here is the final text which will be added to your main file of the entry"

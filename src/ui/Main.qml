@@ -95,6 +95,18 @@ ApplicationWindow {
             delegate: ItemDelegate {
                 width: listView.width
                 text: model.title
+                contentItem: Row {
+                    spacing: 10
+                    Image {
+                        source: model.iconSrc
+                        width: parent.height
+                        height: parent.height
+                    }
+                    Text {
+                        text: model.title
+                        font.pixelSize: 20
+                    }
+                }
                 highlighted: ListView.isCurrentItem
                 onClicked: {
                     listView.currentIndex = index
@@ -104,7 +116,7 @@ ApplicationWindow {
             }
 
             model: ListModel {
-                ListElement { title: "App settings"; source: "./pages/settings.qml" }
+                ListElement { title: "App settings"; source: "./pages/settings.qml"; iconSrc: "qrc:/graphics/images/icons/resources/icons/settings.svg" }
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }
