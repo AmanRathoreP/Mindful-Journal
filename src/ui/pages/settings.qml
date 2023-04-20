@@ -19,7 +19,7 @@ Page {
             }
             checked: String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false
             onCheckedChanged:{
-                labelRestartText.visible = checked === (String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false) ? false : restartTextVisibility
+                labelRestartText.visible = (checked === (String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false) ? false : restartTextVisibility) || labelRestartText.visible
                 myAppSettings.set_value(settingId, checked)
             }
             ToolTip {
@@ -40,7 +40,7 @@ Page {
             }
             checked: String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false
             onCheckedChanged: {
-                labelRestartText.visible = checked === (String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false) ? false : restartTextVisibility
+                labelRestartText.visible = (checked === (String(myAppSettings.get_value(settingId)).indexOf("t") !== -1 ? true : false) ? false : restartTextVisibility) || labelRestartText.visible
                 myAppSettings.set_value(settingId, checked)
             }
             ToolTip {
@@ -68,7 +68,7 @@ Page {
                 }
 
                 onValueChanged: {
-                    labelRestartText.visible = value === parseInt(myAppSettings.get_value(settingId)) ? false : restartTextVisibility
+                    labelRestartText.visible = (value === parseInt(myAppSettings.get_value(settingId)) ? false : restartTextVisibility) || labelRestartText.visible
                     myAppSettings.set_value(settingId, value)
                 }
                 ToolTip {
