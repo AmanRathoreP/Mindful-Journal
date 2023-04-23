@@ -14,33 +14,39 @@ Page {
         id: textFieldDelegateComponent
 
         Column{
-            Label {
-                text: labelText
-            }
-        TextField {
-            placeholderText: labelText
-            text: String(myAppSettings.get_value(settingId))
-            anchors{
+            Rectangle{
+                anchors{
                     left:parent.left
                     right:parent.right
-            }
-            onTextChanged:{
-                var disallowedChars = ["\\", "/", ":", "*", "?", "\"", "|"]
-                for (var i = 0; i < disallowedChars.length; i++) {
-                    if (text.indexOf(disallowedChars[i]) !== -1) {
-                        text = text.replace(disallowedChars[i], "")
-                    }
                 }
-                labelRestartText.visible = (text === String(myAppSettings.get_value(settingId)) ? false : restartTextVisibility) || labelRestartText.visible
-                myAppSettings.set_value(settingId, text)
+                height: 5
             }
-            ToolTip {
-                text: toolTipText
-                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
-                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+
+            TextField {
+                placeholderText: labelText
+                text: String(myAppSettings.get_value(settingId))
+                anchors{
+                    left:parent.left
+                    right:parent.right
+                }
+                onTextChanged:{
+                    var disallowedChars = ["\\", "/", ":", "*", "?", "\"", "|"]
+                    for (var i = 0; i < disallowedChars.length; i++) {
+                        if (text.indexOf(disallowedChars[i]) !== -1) {
+                            text = text.replace(disallowedChars[i], "")
+                        }
+                    }
+                    labelRestartText.visible = (text === String(myAppSettings.get_value(settingId)) ? false : restartTextVisibility) || labelRestartText.visible
+                    myAppSettings.set_value(settingId, text)
+                }
+                ToolTip {
+                    text: toolTipText
+                    delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
+                    //                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+                    visible: ( parent.hovered) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+                }
             }
         }
-    }
     }
 
     Component {
