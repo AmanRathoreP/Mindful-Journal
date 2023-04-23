@@ -150,7 +150,7 @@ Page {
 
             ListElement { type: "TextFieldDelegate";
                 labelTextToDisplay: "New Item adding format";
-                toolTipTextToDisplay: "Provides the format in which the new item name will come";
+                toolTipTextToDisplay: "<html><body>Provides the format in which the new item name will come<br><div>dd.MM.yyyy	21.05.2001<br>ddd MMMM d yy	Tue May 21 01<br>hh:mm:ss.zzz14:13:09.120<br>hh:mm:ss.z	14:13:09.12<br>h:m:s ap	2:13:9 pm</div></body></html>";
                 textOfSetting: "newItemAddingFormat";
                 restartRequired: true
             }

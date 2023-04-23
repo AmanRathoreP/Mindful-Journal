@@ -14,6 +14,20 @@ QString myWriter::getNewSrcName(const int8_t index)
     newSrcName = newSrcName.replace("<source_number>", QString::number(index + 1));
     newSrcName = newSrcName.replace("<entry_number>", "(entry_number)");
 
+    /*
+dd.MM.yyyy	21.05.2001
+ddd MMMM d yy	Tue May 21 01
+hh:mm:ss.zzz	14:13:09.120
+hh:mm:ss.z	14:13:09.12
+h:m:s ap	2:13:9 pm
+*/
+
+    auto __myCurrentDateTime = QDateTime::currentDateTime();
+    for (const QString& str : {"dd", "MM", "yyyy", "ddd", "MMMM", "d", "yy", "hh", "mm", "ss", "zzz", "z", "h", "m", "s", "ap"})
+    {
+        newSrcName = newSrcName.replace("<" + str + ">", __myCurrentDateTime.toString(str));
+    }
+
     return newSrcName;
 }
 
