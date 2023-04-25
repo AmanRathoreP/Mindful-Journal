@@ -14,6 +14,8 @@ int main(int argc, char *argv[])
     myAppSettings.settingsList.append(qMakePair("delayForToolTipsToAppear", 50));
     myAppSettings.settingsList.append(qMakePair("newItemAddingFormat", "Day <entry_number> (<yyyy>-<MM>-<dd>) [src - <source_number>]"));
     myAppSettings.settingsList.append(qMakePair("newEntryFormat", "entry format is not specified"));
+    myAppSettings.settingsList.append(qMakePair("pathOfFolderForEntry", ""));
+    myAppSettings.settingsList.append(qMakePair("useDetailedFormatForEntry", true));
 
     for (int i = 0; i < myAppSettings.settingsList.size(); i++) {
         if (!myAppSettings.contains(myAppSettings.settingsList.at(i).first)) {

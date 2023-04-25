@@ -15,7 +15,7 @@ class myWriterGUI : public QObject, public myWriter
 public:
     explicit myWriterGUI(const QString format, const QString itemFormat, QObject *parent = nullptr);
     Q_INVOKABLE void addSource(const QString srcName, const QString srcPath);
-    Q_INVOKABLE void finishEntry(const QString textEntry);
+    Q_INVOKABLE void finishEntry(const QString textEntry, QString pathToSaveIn, const bool useDetailedFormat);
     Q_INVOKABLE QString getNewSrcName(const int8_t index);
 };
 

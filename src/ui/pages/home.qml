@@ -217,19 +217,25 @@ Page {
                         myEmptySourceNameMessage += String("Item source name is empty with item index<" + String(j+1) + ">\n\n")
                     }
                 }
-                if (myEmptySourcePathMessage + myEmptySourceNameMessage + myAmbiguousNamesMessage === "") {
-                    buttonSaveEntry.enabled=false
-                    buttonStartEntry.enabled=true
-                    buttonAddSource.enabled=false
-                    textMainWriting.enabled=false
-                    for (var i = 0; i < testModel.count; i++) {
-                        myWriter.addSource(testModel.get(i).textName, testModel.get(i).textSrc)
+                if(myAppSettings.get_value("pathOfFolderForEntry") === ""){
+                    showError("Specify the path to save the entries from settings", "Error: No Path Specified for Saving the Entries")
+                }
+                else{
+                    if (myEmptySourcePathMessage + myEmptySourceNameMessage + myAmbiguousNamesMessage === "") {
+                        buttonSaveEntry.enabled=false
+                        buttonStartEntry.enabled=true
+                        buttonAddSource.enabled=false
+                        textMainWriting.enabled=false
+                        for (var i = 0; i < testModel.count; i++) {
+                            myWriter.addSource(testModel.get(i).textName, testModel.get(i).textSrc)
+                        }
+                        myWriter.finishEntry(textMainWriting.text, myAppSettings.get_value("pathOfFolderForEntry"), myAppSettings.get_value("useDetailedFormatForEntry"))
                     }
-                    myWriter.finishEntry(textMainWriting.text)
                 }
                 showError(myEmptySourcePathMessage, "Error: Empty Source Path")
                 showError(myEmptySourceNameMessage, "Error: Empty Source Name")
                 showError(myAmbiguousNamesMessage, "Error: Ambiguous Source Names")
+
             }
 
             ToolTip {

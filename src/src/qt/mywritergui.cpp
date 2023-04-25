@@ -9,9 +9,9 @@ void myWriterGUI::addSource(const QString srcName, const QString srcPath)
     myWriter::addSource(srcName, srcPath);
 }
 
-void myWriterGUI::finishEntry(const QString textEntry)
+void myWriterGUI::finishEntry(const QString textEntry, QString pathToSaveIn, const bool useDetailedFormat)
 {
-    qDebug() << parseEntry(textEntry);
+    saveEntry(textEntry, pathToSaveIn, useDetailedFormat);
 }
 
 QString myWriterGUI::getNewSrcName(const int8_t index)

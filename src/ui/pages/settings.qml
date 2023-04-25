@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Dialogs
 
 Page {
 
@@ -7,7 +8,26 @@ Page {
         "CheckDelegate": checkDelegateComponent,
         "SliderDelegate": sliderDelegateComponent,
         "SwitchDelegate": switchDelegateComponent,
-        "TextFieldDelegate": textFieldDelegateComponent
+        "TextFieldDelegate": textFieldDelegateComponent,
+        "DialogFolderPathDelegate": dialogFolderPathDelegateComponent
+    }
+
+    Component {
+        id: dialogFolderPathDelegateComponent
+
+        ItemDelegate {
+            text: labelText
+            anchors{
+                left: parent.left
+                right: parent.right
+            }
+            onClicked: folderDialogOfSettings.open()
+            ToolTip {
+                text: toolTipText
+                delay: parseInt(myAppSettings.get_value("delayForToolTipsToAppear"))
+                visible: (parent.hovered || parent.pressed) && String(myAppSettings.get_value("showToolTips")).indexOf("t") !== -1 ? true : false
+            }
+        }
     }
 
     Component {
@@ -154,6 +174,20 @@ Page {
                 textOfSetting: "newItemAddingFormat";
                 restartRequired: true
             }
+
+            ListElement { type: "DialogFolderPathDelegate";
+                labelTextToDisplay: "Choose Entries directory";
+                toolTipTextToDisplay: "Sets the directory where all your entries are saved";
+                textOfSetting: "pathOfFolderForEntry";
+                restartRequired: true
+            }
+
+            ListElement { type: "SwitchDelegate";
+                labelTextToDisplay: "Detailed Info. in Entry";
+                toolTipTextToDisplay: "Enable if you want to use a special type of entry format provided by the author";
+                textOfSetting: "useDetailedFormatForEntry";
+                restartRequired: true
+            }
         }
 
         section.property: "type"
@@ -230,6 +264,12 @@ Page {
             visible: false
         }
 
+    }
+
+    FolderDialog {
+        id: folderDialogOfSettings
+        title: "Select the directory to save all entries"
+        onAccepted: myAppSettings.set_value("pathOfFolderForEntry", String(currentFolder))
     }
 
 }
